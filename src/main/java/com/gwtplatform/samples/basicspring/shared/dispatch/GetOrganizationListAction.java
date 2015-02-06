@@ -9,7 +9,7 @@ public class GetOrganizationListAction extends
      * For serialization only.
      */
     @SuppressWarnings("unused")
-    private GetOrganizationListAction() {
+    public GetOrganizationListAction() {
     }
 
 }

@@ -29,7 +29,9 @@ import com.gwtplatform.dispatch.rpc.server.spring.HandlerModule;
 import com.gwtplatform.dispatch.rpc.server.spring.LoggerFactoryBean;
 import com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule;
+import com.gwtplatform.samples.basicspring.server.dispatch.GetOrganizationListHandler;
 import com.gwtplatform.samples.basicspring.server.dispatch.SendTextToServerHandler;
+import com.gwtplatform.samples.basicspring.shared.dispatch.GetOrganizationListAction;
 import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerAction;
 
 /**
@@ -44,22 +46,29 @@ public class ServerModule extends HandlerModule {
 
     @Bean
     public SendTextToServerHandler getSendTextToServerHandler() {
-        return new SendTextToServerHandler();
+	return new SendTextToServerHandler();
     }
 
     @Bean
     public ActionValidator getDefaultActionValidator() {
-        return new DefaultActionValidator();
+	return new DefaultActionValidator();
+    }
+
+    @Bean
+    public GetOrganizationListHandler getGetOrganizationListHandler() {
+	return new GetOrganizationListHandler();
     }
 
     @Bean
     public LoggerFactoryBean getLogger() {
-        Logger logger = Logger.getAnonymousLogger();
-        logger.setLevel(Level.FINEST);
-        return new LoggerFactoryBean(logger);
+	Logger logger = Logger.getAnonymousLogger();
+	logger.setLevel(Level.FINEST);
+	return new LoggerFactoryBean(logger);
     }
 
     protected void configureHandlers() {
-        bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
+	bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
+	bindHandler(GetOrganizationListAction.class,
+		GetOrganizationListHandler.class);
     }
 }

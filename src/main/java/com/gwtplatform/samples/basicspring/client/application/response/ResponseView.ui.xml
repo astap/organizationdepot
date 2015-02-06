@@ -15,11 +15,7 @@
     
         <h1>Remote Procedure Call</h1>
         
-        <div class="{style.label}">Sending name to server:</div>
-        <g:HTML ui:field="textToServer"/>  
-        
-        <div class="{style.label}">Server replies:</div>
-        <g:HTML ui:field="serverResponse"/>
+        <g:SimpleLayoutPanel ui:field="mainPanel"/>
 
         <g:Button ui:field="closeButton">Close</g:Button>
     
