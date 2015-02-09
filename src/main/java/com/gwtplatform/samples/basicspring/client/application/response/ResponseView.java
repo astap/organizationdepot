@@ -16,45 +16,87 @@
 
 package com.gwtplatform.samples.basicspring.client.application.response;
 
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.cell.client.ActionCell;
+import com.google.gwt.cell.client.ActionCell.Delegate;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.IdentityColumn;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.NoSelectionModel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.gwtplatform.samples.basicspring.shared.object.Organization;
 
-public class ResponseView extends ViewWithUiHandlers<ResponseUiHandlers>
+public class ResponseView extends ViewWithUiHandlers<OrganizationsUiHandlers>
 	implements ResponsePresenter.MyView {
+
     interface Binder extends UiBinder<Widget, ResponseView> {
     }
 
     @UiField
-    SimpleLayoutPanel mainPanel;
-
-    @UiField
-    Button closeButton;
+    CellTable<Organization> organizations;
 
     @Inject
     ResponseView(Binder uiBinder) {
+	initCellTable();
+
 	initWidget(uiBinder.createAndBindUi(this));
     }
 
-    @UiHandler("closeButton")
-    void onClose(ClickEvent event) {
-	getUiHandlers().onClose();
+    private void initCellTable() {
+	CellTable<Organization> table = getOrganizations();
+
+	// Create name column.
+	TextColumn<Organization> nameColumn = new TextColumn<Organization>() {
+	    @Override
+	    public String getValue(Organization organization) {
+		return organization.getName();
+	    }
+	};
+
+	Cell<Organization> editCell = new ActionCell<Organization>("Edit",
+		new Delegate<Organization>() {
+		    @Override
+		    public void execute(Organization organization) {
+			getUiHandlers().onEdit(organization);
+		    }
+		});
+
+	Cell<Organization> deleteCell = new ActionCell<Organization>("Delete",
+		new Delegate<Organization>() {
+		    @Override
+		    public void execute(Organization organization) {
+			Boolean confirm = Window
+				.confirm("Are you sure you want to delete "
+					+ organization.getName() + "?");
+
+			if (confirm) {
+			    getUiHandlers().onDelete(organization);
+			}
+		    }
+		});
+
+	IdentityColumn<Organization> editColumn = new IdentityColumn<Organization>(
+		editCell);
+	IdentityColumn<Organization> deleteColumn = new IdentityColumn<Organization>(
+		deleteCell);
+
+	// Add the columns.
+	table.addColumn(nameColumn, "Name");
+	table.addColumn(editColumn, "Edit");
+	table.addColumn(deleteColumn, "Delete");
+
+	final NoSelectionModel selectionModel = new NoSelectionModel();
+	table.setSelectionModel(selectionModel);
     }
 
     @Override
-    public void setInSlot(Object slot, IsWidget content) {
-	if (slot == ResponsePresenter.MAIN_SLOT) {
-	    mainPanel.clear();
-	    mainPanel.setWidget(content);
-	} else {
-	    super.setInSlot(slot, content);
-	}
+    public CellTable<Organization> getOrganizations() {
+	return organizations;
     }
+
 }

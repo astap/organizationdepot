@@ -14,6 +14,7 @@
     <!-- Other module inherits                                      -->
     <inherits name='com.gwtplatform.dispatch.Dispatch'/>
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
+    <inherits name='com.google.gwt.editor.Editor'/>
     
 <!--     <entry-point class="com.gwtplatform.mvp.MvpWithEntryPoint" /> -->
 

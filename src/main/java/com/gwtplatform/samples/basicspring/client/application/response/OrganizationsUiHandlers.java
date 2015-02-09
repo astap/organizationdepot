@@ -17,7 +17,10 @@
 package com.gwtplatform.samples.basicspring.client.application.response;
 
 import com.gwtplatform.mvp.client.UiHandlers;
+import com.gwtplatform.samples.basicspring.shared.object.Organization;
 
-public interface ResponseUiHandlers extends UiHandlers {
-    void onClose();
+public interface OrganizationsUiHandlers extends UiHandlers {
+    void onEdit(Organization organization);
+
+    void onDelete(Organization organization);
 }

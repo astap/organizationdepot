@@ -19,9 +19,7 @@ package com.gwtplatform.samples.basicspring.client.application.response;
 import javax.inject.Inject;
 
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -40,17 +38,15 @@ import com.gwtplatform.samples.basicspring.shared.object.Organization;
 
 public class ResponsePresenter extends
 	Presenter<ResponsePresenter.MyView, ResponsePresenter.MyProxy>
-	implements ResponseUiHandlers {
+	implements OrganizationsUiHandlers {
     @ProxyCodeSplit
     @NameToken(NameTokens.response)
     public interface MyProxy extends ProxyPlace<ResponsePresenter> {
     }
 
-    public interface MyView extends View, HasUiHandlers<ResponseUiHandlers> {
-
+    public interface MyView extends View, HasUiHandlers<OrganizationsUiHandlers> {
+	CellTable<Organization> getOrganizations();
     }
-
-    public static final Object MAIN_SLOT = new Object();
 
     private final DispatchAsync dispatcher;
     private final PlaceManager placeManager;
@@ -97,30 +93,19 @@ public class ResponsePresenter extends
 		    @Override
 		    public void onSuccess(GetOrganizationListResult result) {
 
-			// Create a CellTable.
-			CellTable<Organization> table = new CellTable<Organization>();
-
-			// Create name column.
-			TextColumn<Organization> nameColumn = new TextColumn<Organization>() {
-			    @Override
-			    public String getValue(Organization organization) {
-				return organization.getName();
-			    }
-			};
-
-			// Add the columns.
-			table.addColumn(nameColumn, "Name");
-
-			// Create a data provider.
-			ListDataProvider<Organization> dataProvider = new ListDataProvider<Organization>();
-
-			// Connect the table to the data provider.
-			dataProvider.addDataDisplay(table);
-
-			dataProvider.refresh();
-
-			getView().setInSlot(MAIN_SLOT, table);
 		    }
 		});
+    }
+
+    @Override
+    public void onEdit(Organization organization) {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDelete(Organization organization) {
+	// TODO Auto-generated method stub
+
     }
 }
