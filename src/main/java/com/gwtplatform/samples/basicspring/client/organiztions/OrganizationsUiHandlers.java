@@ -14,8 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.samples.basicspring.client.place;
+package com.gwtplatform.samples.basicspring.client.organiztions;
 
-public class TokenParameters {
-    public static final String TEXT_TO_SERVER = "textToServer";
+import com.gwtplatform.mvp.client.UiHandlers;
+import com.gwtplatform.samples.basicspring.shared.object.Organization;
+
+public interface OrganizationsUiHandlers extends UiHandlers {
+    void onEdit(Organization organization);
+
+    void onDelete(Organization organization);
 }

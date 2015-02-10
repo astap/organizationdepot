@@ -22,7 +22,7 @@ import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
-import com.gwtplatform.samples.basicspring.client.application.ApplicationModule;
+import com.gwtplatform.samples.basicspring.client.organiztions.OrganizationsModule;
 import com.gwtplatform.samples.basicspring.client.place.NameTokens;
 
 public class ClientModule extends AbstractPresenterModule {
@@ -31,11 +31,13 @@ public class ClientModule extends AbstractPresenterModule {
     protected void configure() {
 	install(new DefaultModule());
 	install(new RpcDispatchAsyncModule());
-	install(new ApplicationModule());
+	install(new OrganizationsModule());
 
-	bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.home);
-	bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.home);
+	bindConstant().annotatedWith(DefaultPlace.class).to(
+		NameTokens.organizations);
+	bindConstant().annotatedWith(ErrorPlace.class).to(
+		NameTokens.organizations);
 	bindConstant().annotatedWith(UnauthorizedPlace.class).to(
-		NameTokens.home);
+		NameTokens.organizations);
     }
 }

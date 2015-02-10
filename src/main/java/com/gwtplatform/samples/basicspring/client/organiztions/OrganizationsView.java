@@ -1,4 +1,6 @@
-package com.gwtplatform.samples.basicspring.client.application.organiztions;
+package com.gwtplatform.samples.basicspring.client.organiztions;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,20 +16,20 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.gwtplatform.samples.basicspring.client.application.response.OrganizationsUiHandlers;
 import com.gwtplatform.samples.basicspring.shared.object.Organization;
 
-class OrganiztionsView extends ViewWithUiHandlers<OrganizationsUiHandlers>
-	implements OrganiztionsPresenter.MyView {
+public class OrganizationsView extends
+	ViewWithUiHandlers<OrganizationsUiHandlers> implements
+	OrganizationsPresenter.MyView {
 
-    interface Binder extends UiBinder<Widget, OrganiztionsView> {
+    interface Binder extends UiBinder<Widget, OrganizationsView> {
     }
 
-    @UiField
+    @UiField(provided = true)
     CellTable<Organization> organizations;
 
     @Inject
-    OrganiztionsView(Binder uiBinder) {
+    OrganizationsView(Binder uiBinder) {
 	initCellTable();
 	initWidget(uiBinder.createAndBindUi(this));
     }
@@ -35,7 +37,6 @@ class OrganiztionsView extends ViewWithUiHandlers<OrganizationsUiHandlers>
     private void initCellTable() {
 	organizations = new CellTable<Organization>();
 
-	// Create name column.
 	TextColumn<Organization> nameColumn = new TextColumn<Organization>() {
 	    @Override
 	    public String getValue(Organization organization) {
@@ -70,7 +71,6 @@ class OrganiztionsView extends ViewWithUiHandlers<OrganizationsUiHandlers>
 	IdentityColumn<Organization> deleteColumn = new IdentityColumn<Organization>(
 		deleteCell);
 
-	// Add the columns.
 	organizations.addColumn(nameColumn, "Name");
 	organizations.addColumn(editColumn, "Edit");
 	organizations.addColumn(deleteColumn, "Delete");
@@ -78,12 +78,10 @@ class OrganiztionsView extends ViewWithUiHandlers<OrganizationsUiHandlers>
 	organizations.setSelectionModel(new NoSelectionModel<Organization>());
     }
 
-    // @Override
-    // public void setInSlot(Object slot, IsWidget content) {
-    // if (slot == OrganiztionsPresenter.SLOT_Organiztions) {
-    // main.setWidget(content);
-    // } else {
-    // super.setInSlot(slot, content);
-    // }
-    // }
+    @Override
+    public void displayOrganizations(List<Organization> organizationList) {
+	organizations.setRowData(organizationList);
+	organizations.redraw();
+    }
+
 }

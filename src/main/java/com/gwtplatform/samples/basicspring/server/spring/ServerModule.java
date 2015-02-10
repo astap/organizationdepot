@@ -19,6 +19,7 @@ package com.gwtplatform.samples.basicspring.server.spring;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +31,7 @@ import com.gwtplatform.dispatch.rpc.server.spring.LoggerFactoryBean;
 import com.gwtplatform.dispatch.rpc.server.spring.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.rpc.server.spring.configuration.DefaultModule;
 import com.gwtplatform.samples.basicspring.server.dispatch.GetOrganizationListHandler;
-import com.gwtplatform.samples.basicspring.server.dispatch.SendTextToServerHandler;
 import com.gwtplatform.samples.basicspring.shared.dispatch.GetOrganizationListAction;
-import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerAction;
 
 /**
  * Module which binds the handlers and configurations.
@@ -42,11 +41,6 @@ import com.gwtplatform.samples.basicspring.shared.dispatch.SendTextToServerActio
 @ComponentScan(basePackages = "com.gwtplatform.dispatch.rpc.server.spring")
 public class ServerModule extends HandlerModule {
     public ServerModule() {
-    }
-
-    @Bean
-    public SendTextToServerHandler getSendTextToServerHandler() {
-	return new SendTextToServerHandler();
     }
 
     @Bean
@@ -60,14 +54,19 @@ public class ServerModule extends HandlerModule {
     }
 
     @Bean
+    public SessionFactory getSessionFactory() {
+	return null;
+    }
+
+    @Bean
     public LoggerFactoryBean getLogger() {
 	Logger logger = Logger.getAnonymousLogger();
 	logger.setLevel(Level.FINEST);
 	return new LoggerFactoryBean(logger);
     }
 
+    @Override
     protected void configureHandlers() {
-	bindHandler(SendTextToServerAction.class, SendTextToServerHandler.class);
 	bindHandler(GetOrganizationListAction.class,
 		GetOrganizationListHandler.class);
     }

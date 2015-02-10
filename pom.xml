@@ -92,11 +92,6 @@
 				</configuration>
 			</plugin>
 
-			<!-- GWT -->
-			<!-- 'mvn gwt:run' - runs development mode -->
-			<!-- 'mvn gwt:debug' - runs debug mode -->
-			<!-- 'mvn gwt:compile' - compiles gwt -->
-			<!-- 'mvn integration-test' - runs the gwt tests (*GwtTest.java) -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
@@ -170,6 +165,21 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
+
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		
+		<!-- H2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.185</version>
+		</dependency>
+
 
 		<!-- Testing -->
 		<dependency>
