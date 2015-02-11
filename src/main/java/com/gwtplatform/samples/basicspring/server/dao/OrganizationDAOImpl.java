@@ -1,6 +1,5 @@
 package com.gwtplatform.samples.basicspring.server.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -15,13 +14,10 @@ public class OrganizationDAOImpl implements OrganizationDAO {
     @Autowired
     SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Organization> getOrganizationsList() {
-	List<Organization> organizations = new ArrayList<Organization>();
-	organizations.add(new Organization("org1"));
-	organizations.add(new Organization("org2"));
-	organizations.add(new Organization("org3"));
-	return organizations;
+	return (List<Organization>) sessionFactory.getCurrentSession()
+		.createQuery("from Organization").list();
     }
-
 }

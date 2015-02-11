@@ -13,16 +13,8 @@ import javax.persistence.Table;
 public class Organization implements Serializable {
     private static final long serialVersionUID = -2793401755203205133L;
 
-    public Organization() {
-    }
-
-    public Organization(String name) {
-	this.name = name;
-    }
-
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
@@ -33,6 +25,14 @@ public class Organization implements Serializable {
 
     @Column(name = "information")
     private String information;
+
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
     public String getName() {
 	return name;

@@ -19,7 +19,10 @@ package com.gwtplatform.samples.basicspring.server.spring;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.transaction.TransactionManager;
+
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -57,6 +60,16 @@ public class ServerModule extends HandlerModule {
     public SessionFactory getSessionFactory() {
 	return new org.hibernate.cfg.Configuration().configure()
 		.buildSessionFactory();
+    }
+
+    @Bean(name = "txName")
+    @Autowired
+    public HibernateTransactionManager runnableTransactionManager(
+	    SessionFactory sessionFactory) {
+	TransactionManager manager;
+	HibernateTransactionManager htm = new HibernateTransactionManager();
+	htm.setSessionFactory(sessionFactory);
+	return htm;
     }
 
     @Bean

@@ -12,12 +12,16 @@
 		</property>
 
 		<!-- Assume students is the database name -->
-		<property name="hibernate.connection.url">jdbc:h2:db/repository</property>
+		<property name="hibernate.connection.url">jdbc:h2:~/test</property>
 		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.password" />
 		<property name="hibernate.default_schema">PUBLIC</property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
+		<property name="javax.persistence.validation.mode">NONE</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<mapping class="com.gwtplatform.samples.basicspring.shared.object.Organization"/>
 
 	</session-factory>
 </hibernate-configuration>
