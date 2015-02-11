@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="gwtp-sample-basic-spring"/>
         <property name="java-output-path" value="/gwtp-sample-basic-spring/target/gwtp-sample-basic-spring-1.1-SNAPSHOT/WEB-INF/classes"/>
     </wb-module>

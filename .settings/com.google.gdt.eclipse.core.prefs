@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
-lastWarOutDir=C\:/Users/sbt-astapenko-ao/git/organizationdepot/target/gwtp-sample-basic-spring-1.0.0-SNAPSHOT
-warSrcDir=target/gwtp-sample-basic-spring-1.0.0-SNAPSHOT
+lastWarOutDir=C\:/Users/sbt-astapenko-ao/git/organizationdepot/target/organizationdepot-1.0.0-SNAPSHOT
+warSrcDir=src/main/webapp
 warSrcDirIsOutput=false

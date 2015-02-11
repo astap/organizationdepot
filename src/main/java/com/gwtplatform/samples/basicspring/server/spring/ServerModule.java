@@ -55,7 +55,8 @@ public class ServerModule extends HandlerModule {
 
     @Bean
     public SessionFactory getSessionFactory() {
-	return null;
+	return new org.hibernate.cfg.Configuration().configure()
+		.buildSessionFactory();
     }
 
     @Bean
